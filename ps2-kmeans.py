@@ -1,11 +1,13 @@
 import sys, csv, random
 
+
 # find square distances
 def dsquare(pt1,pt2,dim):
     d = 0
     for i in range(dim):
         d += (pt1[i]-pt2[i])**2
     return d
+
 
 def assign_to_c(pt,dim,*c):
     ## initializing dmin and ci before the loop with i=0 case, start on i=1 in loop
@@ -25,25 +27,30 @@ def assign_to_c(pt,dim,*c):
     pt[dim] = ci
     return pt
 
+
 def main():
     if len(sys.argv) < 3:
         print("Usage: {0} <TSV> <int k>".format(sys.argv[0]))
         sys.exit(1)
 
+    data = []
     with open(sys.argv[1], 'r') as f:
         reader = csv.reader(f, delimiter='\t')
         for row in reader:
-            print(row)
-        close(f)
+            data.append(row)
+        f.close()
 
-    k = sys.argv[2]
+    dim = len(data[0])
+    k = int(sys.argv[2])
 
-    # initialize k centers
+    # initialize k centers of dim dimensions, with cluster index as last list list item
     centers = []
     for i in range(k):
-        centers.append([i+random.randint(0,10)/10*(i+1),
-                        i+random.randint(0,10)/10*(i+1),
-                        i])
+        centers.append([])
+        for j in range(dim):
+            centers[i].append(i+random.randint(0,10)/10*(i+1))
+        centers[i].append(i)
+
 
 if __name__ == "__main__":
     main()
