@@ -4,44 +4,43 @@ import matplotlib.pyplot as plt
 
 
 # find square distances
-def dsquare(pt1,pt2,dim):
+def dsquare(pt1, pt2, dim):
     d = 0
     for i in range(dim):
-        d += (float(pt1[i])-float(pt2[i]))**2
+        d += (float(pt1[i]) - float(pt2[i])) ** 2
     return d
 
 
-def assign_to_c(pt,dim,c):
-    ## initializing dmin and ci before the loop with i=0 case, start on i=1 in loop
+def assign_to_c(pt, dim, c):
+    # initializing d_min and ci before the loop with i=0 case, start on i=1 in loop
     # min distance squared
-
-    dmin = dsquare(c[0],pt,dim)
-    # cluster index of dmin
+    d_min = dsquare(c[0], pt, dim)
+    # cluster index of d_min
     ci = c[0][dim]
 
     # start loop at cluster index i=1
     for i in c[1:]:
         di = dsquare(i, pt, dim)
-        if di < dmin:
-            dmin = di
-            ci = i[dim] # retrieves cluster index of current cluster compared
+        if di < d_min:
+            d_min = di
+            ci = i[dim]  # retrieves cluster index of current cluster compared
 
     pt[dim] = ci
     return pt
 
 
-def recenter(c,data,dim):
+def recenter(c, data, dim):
     re_c = []
     for i in range(len(c)):
-        re_c.append([0,0,-1])
+        re_c.append([0, 0, -1])  # placeholders to be written over; no cluster exists of index -1
 
     for i, val in enumerate(c):
 
         # init runsums for value and count of x
-        xi = [] # sum of all x with label k (for each dim)
+        xi = []  # sum of all x with label k (for each dim)
         for j in range(dim):
             xi.append(0)
-        xk = 0 # count of xi with label k
+        xk = 0  # count of xi with label k
 
         for j in range(len(data)):
             # if a point's assigned cluster is the cluster being recentered
@@ -61,7 +60,7 @@ def recenter(c,data,dim):
 
 
 # open tsv, parse into list, close file
-def readtsv():
+def read_tsv():
     data = []
     with open(sys.argv[1], 'r') as f:
         reader = csv.reader(f, delimiter='\t')
@@ -72,17 +71,17 @@ def readtsv():
 
 
 # initialize k centers of dim dimensions, with cluster index as last list list item
-def initc(k,dim):
+def init_c(k, dim):
     centers = []
     for i in range(k):
         centers.append([])
         for j in range(dim):
-            centers[i].append(i+random.randint(0,10)/10*(i+1)) #rethink random location alg?
+            centers[i].append(i + random.randint(0, 10) / 10 * (i + 1))  # rethink random location alg?
         centers[i].append(i)
     return centers
 
 
-def plot(c,data,dim):
+def plot(c, data, dim):
     fig = plt.figure()
     ax1 = fig.add_subplot(111)
 
@@ -106,7 +105,7 @@ def plot(c,data,dim):
         else:
             col2.append('b')
 
-    ax1.scatter([float(row[0]) for row in c],[float(row[1]) for row in c],c=col2,s=15,marker="s")
+    ax1.scatter([float(row[0]) for row in c], [float(row[1]) for row in c], c=col2, s=15, marker="s")
     plt.show()
 
 
@@ -116,26 +115,26 @@ def main():
         sys.exit(1)
 
     # read in tsv data
-    data = readtsv()
+    data = read_tsv()
 
     # assign number of dimensions and number of clusters
-    dim = len(data[0]) - 1 # -1 as each row comprises of the axes and a final column for the cluster index
+    dim = len(data[0]) - 1  # -1 as each row comprises of the axes and a final column for the cluster index
     k = int(sys.argv[2])
 
     # initialize centers at randomized locations
-    centers = initc(k,dim)
+    centers = init_c(k, dim)
 
     # classify points to nearest centers
     for i in range(len(data)):
         data[i] = assign_to_c(data[i], dim, centers)
 
     # move each center to centroid of newly labeled points
-    re_c = recenter(centers,data,dim)
+    re_c = recenter(centers, data, dim)
     iterations = 0
 
     while centers != re_c and iterations < 20:
         iterations += 1
-        sys.stderr.write("Iteration #" + str(iterations) + "\n")
+        sys.stdout.write("Iteration #" + str(iterations) + "\n")
 
         centers = re_c
 
@@ -144,7 +143,7 @@ def main():
 
         re_c = recenter(centers, data, dim)
 
-    plot(centers,data,dim)
+    plot(centers, data, dim)
 
 
 if __name__ == "__main__":
