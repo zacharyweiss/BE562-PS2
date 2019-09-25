@@ -1,10 +1,11 @@
-import sys, csv, random
-import numpy as np
+import csv
+import random
+import sys
 import matplotlib.pyplot as plt
 
 
 # find square distances
-def dsquare(pt1, pt2, dim):
+def d_square(pt1, pt2, dim):
     d = 0
     for i in range(dim):
         d += (float(pt1[i]) - float(pt2[i])) ** 2
@@ -14,13 +15,13 @@ def dsquare(pt1, pt2, dim):
 def assign_to_c(pt, dim, c):
     # initializing d_min and ci before the loop with i=0 case, start on i=1 in loop
     # min distance squared
-    d_min = dsquare(c[0], pt, dim)
+    d_min = d_square(c[0], pt, dim)
     # cluster index of d_min
     ci = c[0][dim]
 
     # start loop at cluster index i=1
     for i in c[1:]:
-        di = dsquare(i, pt, dim)
+        di = d_square(i, pt, dim)
         if di < d_min:  # if a new minimum distance is found
             d_min = di  # replace with lowest distance
             ci = i[dim]  # store cluster index of current cluster center
@@ -134,7 +135,7 @@ def main():
 
     while centers != re_c and iterations < 20:
         iterations += 1
-        sys.stdout.write("Iteration #" + str(iterations) + "\n")
+        # sys.stdout.write("Iteration #" + str(iterations) + "\n")
 
         centers = re_c
 
@@ -142,6 +143,11 @@ def main():
             data[i] = assign_to_c(data[i], dim, centers)
 
         re_c = recenter(centers, data, dim)
+
+    for c in centers:
+        sys.stdout.write("Cluster #" + str(c[dim]) + ": " + str(c[0:dim]) + "\n")
+    for d in data:
+        sys.stdout.write(str(d) + "\n")
 
     plot(centers, data, dim)
 

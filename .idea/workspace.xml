@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f502ebf1-d009-4e8e-abc6-efad4b74a9d6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out" beforeDir="false" afterPath="$PROJECT_DIR$/out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ps2-kmeans.py" beforeDir="false" afterPath="$PROJECT_DIR$/ps2-kmeans.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -100,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569424323642</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Readability pt2">
+      <created>1569424406588</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1569424406588</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -120,6 +129,7 @@
     <MESSAGE value="Bunch o new additions" />
     <MESSAGE value="Working k-means, with plotting to visualize (2-d only)" />
     <MESSAGE value="Readability" />
-    <option name="LAST_COMMIT_MESSAGE" value="Readability" />
+    <MESSAGE value="Readability pt2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Readability pt2" />
   </component>
 </project>
