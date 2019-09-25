@@ -21,9 +21,9 @@ def assign_to_c(pt, dim, c):
     # start loop at cluster index i=1
     for i in c[1:]:
         di = dsquare(i, pt, dim)
-        if di < d_min:
-            d_min = di
-            ci = i[dim]  # retrieves cluster index of current cluster compared
+        if di < d_min:  # if a new minimum distance is found
+            d_min = di  # replace with lowest distance
+            ci = i[dim]  # store cluster index of current cluster center
 
     pt[dim] = ci
     return pt
