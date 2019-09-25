@@ -79,6 +79,14 @@
       <option name="presentableId" value="Default" />
       <updated>1569353688973</updated>
     </task>
+    <task id="LOCAL-00001" summary="Bunch o new additions">
+      <created>1569382183578</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1569382183578</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -93,5 +101,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Bunch o new additions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bunch o new additions" />
   </component>
 </project>

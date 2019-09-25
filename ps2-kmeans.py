@@ -83,17 +83,30 @@ def initc(k,dim):
 
 
 def plot(c,data,dim):
-    # x =  range(max(data[:][0]))
-    # y = range(max(data[:][1]))
-    # fig = plt.figure()
-    # ax1 = fig.add_subplot(111)
-    #
-    # col = np.where(data[dim]==0,'k',np.where(data[dim]==1,'b','r'))
-    #
-    # ax1.scatter(data[:][0], data[:][1], c=col, s=5)
-    # plt.show()
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
 
-    plt.scatter(data[:][0], data[:][1])
+    col = []
+    for i in range(len(data)):
+        if [float(row[dim]) for row in data][i] == 0:
+            col.append('k')
+        elif [float(row[dim]) for row in data][i] == 1:
+            col.append('r')
+        else:
+            col.append('b')
+
+    ax1.scatter([float(row[0]) for row in data], [float(row[1]) for row in data], c=col, s=5)
+
+    col2 = []
+    for i in range(len(c)):
+        if [float(row[dim]) for row in c][i] == 0:
+            col2.append('k')
+        elif [float(row[dim]) for row in c][i] == 1:
+            col2.append('r')
+        else:
+            col2.append('b')
+
+    ax1.scatter([float(row[0]) for row in c],[float(row[1]) for row in c],c=col2,s=15,marker="s")
     plt.show()
 
 
