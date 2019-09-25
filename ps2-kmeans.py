@@ -1,8 +1,14 @@
 import csv
 import random
 import sys
+import argparse
 import matplotlib.pyplot as plt
 
+parser = argparse.ArgumentParser()
+parser.add_argument('fname', type=str)
+parser.add_argument('k_clusters', metavar='k', type=int)
+parser.add_argument('-fuzzy', action='store_true')
+args = parser.parse_args()
 
 # find square distances
 def d_square(pt1, pt2, dim):
@@ -63,7 +69,7 @@ def recenter(c, data, dim):
 # open tsv, parse into list, close file
 def read_tsv():
     data = []
-    with open(sys.argv[1], 'r') as f:
+    with open(args.fname, 'r') as f:
         reader = csv.reader(f, delimiter='\t')
         for row in reader:
             data.append(row)
@@ -72,9 +78,9 @@ def read_tsv():
 
 
 # initialize k centers of dim dimensions, with cluster index as last list list item
-def init_c(k, dim):
+def init_c(dim):
     centers = []
-    for i in range(k):
+    for i in range(args.k_clusters):
         centers.append([])
         for j in range(dim):
             centers[i].append(i + random.randint(0, 10) / 10 * (i + 1))  # rethink random location alg?
@@ -111,44 +117,51 @@ def plot(c, data, dim):
 
 
 def main():
-    if len(sys.argv) < 3:
-        print("Usage: {0} <TSV> <int k>".format(sys.argv[0]))
-        sys.exit(1)
+    # if len(sys.argv) < 3:
+    #     print("Usage: {0} <TSV> <int k> [-fuzzy]".format(sys.argv[0]))
+    #     sys.exit(1)
 
     # read in tsv data
     data = read_tsv()
 
     # assign number of dimensions and number of clusters
     dim = len(data[0]) - 1  # -1 as each row comprises of the axes and a final column for the cluster index
-    k = int(sys.argv[2])
+    # k = int(args.k_clusters)
 
     # initialize centers at randomized locations
-    centers = init_c(k, dim)
+    centers = init_c(dim)
 
-    # classify points to nearest centers
-    for i in range(len(data)):
-        data[i] = assign_to_c(data[i], dim, centers)
-
-    # move each center to centroid of newly labeled points
-    re_c = recenter(centers, data, dim)
-    iterations = 0
-
-    while centers != re_c and iterations < 20:
-        iterations += 1
-        # sys.stdout.write("Iteration #" + str(iterations) + "\n")
-
-        centers = re_c
-
+    # normal / fuzzy k-means switching
+    if not args.fuzzy:
+        # classify points to nearest centers
         for i in range(len(data)):
             data[i] = assign_to_c(data[i], dim, centers)
 
+        # move each center to centroid of newly labeled points
         re_c = recenter(centers, data, dim)
+        iterations = 0
+
+        while centers != re_c and iterations < 20:
+            iterations += 1
+            # sys.stdout.write("Iteration #" + str(iterations) + "\n")
+
+            centers = re_c
+
+            for i in range(len(data)):
+                data[i] = assign_to_c(data[i], dim, centers)
+
+            re_c = recenter(centers, data, dim)
+    # elif args.fuzzy:
+    else:
+        sys.stderr.write("Fuzzy arg err")
+        sys.exit(1)
 
     for c in centers:
         sys.stdout.write("Cluster #" + str(c[dim]) + ": " + str(c[0:dim]) + "\n")
     for d in data:
         sys.stdout.write(str(d) + "\n")
 
+    sys.stdout.write("Fuzzy: "+ str(args.fuzzy) + "\n")
     plot(centers, data, dim)
 
 
