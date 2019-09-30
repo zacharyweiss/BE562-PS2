@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f502ebf1-d009-4e8e-abc6-efad4b74a9d6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out" beforeDir="false" afterPath="$PROJECT_DIR$/out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ps2-kmeans.py" beforeDir="false" afterPath="$PROJECT_DIR$/ps2-kmeans.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,7 +42,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.ps2-kmeans">
+    <configuration name="fkmeans" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="BE562-PS2" />
+      <option name="INTERPRETER_OPTIONS" value="-s" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\ProgramData\Miniconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/fkmeans.py" />
+      <option name="PARAMETERS" value="&quot;out&quot; &quot;3&quot; &quot;2&quot;" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="ps2-kmeans" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="BE562-PS2" />
       <option name="INTERPRETER_OPTIONS" value="-s" />
@@ -55,7 +77,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ps2-kmeans.py" />
-      <option name="PARAMETERS" value="&quot;out&quot; &quot;2&quot;" />
+      <option name="PARAMETERS" value="&quot;out&quot; &quot;3&quot;" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -63,6 +85,10 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.fkmeans" />
+      <item itemvalue="Python.ps2-kmeans" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.ps2-kmeans" />
@@ -115,7 +141,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569429330069</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Argument reworking to allow flags; fuzzy k-means flag switching">
+      <created>1569437903030</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1569437903030</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -137,6 +170,28 @@
     <MESSAGE value="Readability" />
     <MESSAGE value="Readability pt2" />
     <MESSAGE value="Console outputs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Console outputs" />
+    <MESSAGE value="Argument reworking to allow flags; fuzzy k-means flag switching" />
+    <option name="LAST_COMMIT_MESSAGE" value="Argument reworking to allow flags; fuzzy k-means flag switching" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/fkmeans.py</url>
+          <line>19</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/fkmeans.py</url>
+          <line>15</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/fkmeans.py</url>
+          <line>50</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
