@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f502ebf1-d009-4e8e-abc6-efad4b74a9d6" name="Default Changelist" comment="Reworked plotting, fuzzy working, non-fuzzy integrated into same functions as fuzzy (in form of a special case of fuzzy)">
+    <list default="true" id="f502ebf1-d009-4e8e-abc6-efad4b74a9d6" name="Default Changelist" comment="Removing redundancy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out" beforeDir="false" afterPath="$PROJECT_DIR$/out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ps2-kmeans.py" beforeDir="false" afterPath="$PROJECT_DIR$/ps2-kmeans.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -154,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569863079049</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Removing redundancy">
+      <created>1569863652908</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1569863652908</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -178,6 +186,7 @@
     <MESSAGE value="Console outputs" />
     <MESSAGE value="Argument reworking to allow flags; fuzzy k-means flag switching" />
     <MESSAGE value="Reworked plotting, fuzzy working, non-fuzzy integrated into same functions as fuzzy (in form of a special case of fuzzy)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reworked plotting, fuzzy working, non-fuzzy integrated into same functions as fuzzy (in form of a special case of fuzzy)" />
+    <MESSAGE value="Removing redundancy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removing redundancy" />
   </component>
 </project>

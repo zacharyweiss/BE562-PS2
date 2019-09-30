@@ -7,6 +7,7 @@ import numpy as np
 parser = argparse.ArgumentParser()
 parser.add_argument('fname', type=str)
 parser.add_argument('k_clusters', metavar='k', type=int)
+parser.add_argument('export_name', type=str)
 parser.add_argument('-fuzzy', action='store_true')
 args = parser.parse_args()
 
@@ -62,12 +63,7 @@ def assign_c_prob(pt, dim, c):
 
         # create array of ratios to be summed over
         for d_j in d:
-            # print(d_k)
-            # print(d_j)
-            # print(d_k/d_j)
-            d_ratio.append(
-                (d_k / d_j) ** (2/(m-1))
-            )
+            d_ratio.append((d_k / d_j) ** (2/(m-1)))
 
         # calculate and append final wk for the current center
         wk.append(1 / sum(d_ratio))
@@ -176,9 +172,6 @@ def init_c(data):
         centers.append(data[i][:2])
         centers[c_index].append(c_index)
         c_index += 1
-        # for j in range(dim):
-        #     centers[i].append(i + np.random.randint(0, 10) / 10 * (i + 1))  # rethink random location alg?
-        # centers[i].append(i)
     return centers
 
 
@@ -207,52 +200,15 @@ def plot(c, data, dim):
                     linewidths=1,
                     edgecolors="000")
 
-    plt.savefig("figure"+str(plot_fn)+".png")
+    plt.savefig(args.export_name+".png")
     plt.show()
     plot_fn += 1
-    # fig = plt.figure()
-    # ax1 = fig.add_subplot(111)
-    #
-    # col = []
-    # if not args.fuzzy:
-    #     for i in range(len(data)):
-    #         if [float(row[dim]) for row in data][i] == 0:
-    #             col.append('k')
-    #         elif [float(row[dim]) for row in data][i] == 1:
-    #             col.append('r')
-    #         else:
-    #             col.append('b')
-    # else:
-    #     for i in range(len(data)):
-    #         if [row[dim].index(max(row[dim])) for row in data][i] == 0:
-    #             col.append('k')
-    #         elif [row[dim].index(max(row[dim])) for row in data][i] == 1:
-    #             col.append('r')
-    #         else:
-    #             col.append('b')
-    #
-    # ax1.scatter([float(row[0]) for row in data], [float(row[1]) for row in data], c=col, s=5)
-    #
-    # col2 = []
-    # for i in range(len(c)):
-    #     if [float(row[dim]) for row in c][i] == 0:
-    #         col2.append('k')
-    #     elif [float(row[dim]) for row in c][i] == 1:
-    #         col2.append('r')
-    #     else:
-    #         col2.append('b')
-    #
-    # ax1.scatter([float(row[0]) for row in c], [float(row[1]) for row in c], c=col2, s=15, marker="s")
-    # plt.show()
 
 
 def main():
-    # if len(sys.argv) < 3:
-    #     print("Usage: {0} <TSV> <int k> [-fuzzy]".format(sys.argv[0]))
-    #     sys.exit(1)
-
     # read in tsv data
     data = read_tsv()
+    orig_data = data  # store off to the side
 
     # assign number of dimensions and number of clusters
     dim = len(data[0]) - 1  # -1 as each row comprises of the axes and a final column for the cluster index
@@ -260,29 +216,6 @@ def main():
 
     # initialize centers at randomized locations
     centers = init_c(data)
-
-    # # normal / fuzzy k-means switching
-    # if not args.fuzzy:
-    #     # classify points to nearest centers
-    #     for i in range(len(data)):
-    #         data[i] = assign_to_c(data[i], dim, centers)
-    #
-    #     # move each center to centroid of newly labeled points
-    #     re_c = recenter(centers, data, dim)
-    #     iterations = 1
-    #
-    #     while centers != re_c and iterations < 20:
-    #         iterations += 1
-    #         # sys.stdout.write("Iteration #" + str(iterations) + "\n")
-    #
-    #         centers = re_c
-    #
-    #         for i in range(len(data)):
-    #             data[i] = assign_to_c(data[i], dim, centers)
-    #
-    #         re_c = recenter(centers, data, dim)
-    # elif args.fuzzy:
-    #     sys.stdout.write("Fuzzy true\n")
 
     for i in range(len(data)):
         data[i] = assign_c_prob(data[i], dim, centers)
@@ -300,18 +233,14 @@ def main():
             data[i] = assign_c_prob(data[i], dim, centers)
 
         re_c = recenter_prob(data, dim)
-    #
-    # else:
-    #     sys.stderr.write("Fuzzy arg err\n")
-    #     sys.exit(1)
 
-    for c in centers:
-        sys.stdout.write("Cluster #" + str(c[dim]) + ": " + str(c[0:dim]) + "\n")
-    for d in data:
-        sys.stdout.write(str(d) + "\n")
+    # for c in centers:
+    #     print("Cluster #" + str(c[dim]) + ": " + str(c[0:dim]) + "\n")
+    # for d in data:
+    #     print(str(d) + "\n")
 
-    sys.stdout.write("Fuzzy: " + str(args.fuzzy) + "\n")
-    print(iterations)
+    print("Fuzzy: " + str(args.fuzzy) + "\n")
+    print("Iterations: " + str(iterations) + "\n")
 
     plot(centers, data, dim)
 
