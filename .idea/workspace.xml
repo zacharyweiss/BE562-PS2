@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f502ebf1-d009-4e8e-abc6-efad4b74a9d6" name="Default Changelist" comment="">
+    <list default="true" id="f502ebf1-d009-4e8e-abc6-efad4b74a9d6" name="Default Changelist" comment="Reworked plotting, fuzzy working, non-fuzzy integrated into same functions as fuzzy (in form of a special case of fuzzy)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out" beforeDir="false" afterPath="$PROJECT_DIR$/out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ps2-kmeans.py" beforeDir="false" afterPath="$PROJECT_DIR$/ps2-kmeans.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -148,7 +147,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569437903030</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Reworked plotting, fuzzy working, non-fuzzy integrated into same functions as fuzzy (in form of a special case of fuzzy)">
+      <created>1569863079049</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1569863079049</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -171,27 +177,7 @@
     <MESSAGE value="Readability pt2" />
     <MESSAGE value="Console outputs" />
     <MESSAGE value="Argument reworking to allow flags; fuzzy k-means flag switching" />
-    <option name="LAST_COMMIT_MESSAGE" value="Argument reworking to allow flags; fuzzy k-means flag switching" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/fkmeans.py</url>
-          <line>19</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/fkmeans.py</url>
-          <line>15</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/fkmeans.py</url>
-          <line>50</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Reworked plotting, fuzzy working, non-fuzzy integrated into same functions as fuzzy (in form of a special case of fuzzy)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reworked plotting, fuzzy working, non-fuzzy integrated into same functions as fuzzy (in form of a special case of fuzzy)" />
   </component>
 </project>

@@ -169,8 +169,7 @@ def read_tsv():
 
 
 # initialize k centers of dim dimensions, with cluster index as last list list item
-def init_c(data, dim):
-    # centers = [np.array(data[i])-0.05 for i in np.random.randint(0,len(data),k)]
+def init_c(data):
     centers = []
     c_index = 0
     for i in np.random.randint(0, len(data), args.k_clusters):
@@ -260,7 +259,7 @@ def main():
     # k = int(args.k_clusters)
 
     # initialize centers at randomized locations
-    centers = init_c(data, dim)
+    centers = init_c(data)
 
     # # normal / fuzzy k-means switching
     # if not args.fuzzy:
