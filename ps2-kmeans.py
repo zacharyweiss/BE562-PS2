@@ -13,7 +13,7 @@ args = parser.parse_args()
 
 # other arguments
 d_threshold = 10**(-100)  # minimum distance to fix overflow and overlapping point issues, acts like a miniature laplace
-i_threshold = 5
+i_threshold = 10
 # max number of iterations before convergence declared
 m = 2  # degree of "fuzziness"; higher -> fuzzier, default of 2
 
