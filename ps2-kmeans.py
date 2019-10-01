@@ -1,5 +1,4 @@
 import csv
-import sys
 import argparse
 import matplotlib.pyplot as plt
 import numpy as np
@@ -9,14 +8,14 @@ parser.add_argument('fname', type=str)
 parser.add_argument('k_clusters', metavar='k', type=int)
 parser.add_argument('export_name', type=str)
 parser.add_argument('-fuzzy', action='store_true')
+parser.add_argument('-transpose', action='store_true')
 args = parser.parse_args()
 
-# variables
-threshold = 100  # max number of iterations
+# other arguments
+d_threshold = 10**(-100)  # minimum distance to fix overflow and overlapping point issues, acts like a miniature laplace
+i_threshold = 5
+# max number of iterations before convergence declared
 m = 2  # degree of "fuzziness"; higher -> fuzzier, default of 2
-
-# filename start int
-plot_fn = 0
 
 
 # find square distances
@@ -25,8 +24,8 @@ def d_square(pt1, pt2, dim):
     for i in range(dim):
         d += (float(pt1[i]) - float(pt2[i])) ** 2
 
-    if d == 0:
-        return d + 0.0000000000001  # correct for if points are at same location
+    if d < d_threshold:
+        return d_threshold  # correct for if points are at same location
     else:
         return d
 # def assign_to_c(pt, dim, c):
@@ -116,8 +115,8 @@ def recenter_prob(data, dim):
                         xi[k] += data[j][k]
             # assign new centroid position to c along each dim
             for j in range(dim):
-                re_c[i][j] = xi[j] / xk
-            re_c[i][dim] = val[dim]
+                val[j] = xi[j] / xk
+            val[dim] = i
         return re_c
 
 #
@@ -165,18 +164,17 @@ def read_tsv():
 
 
 # initialize k centers of dim dimensions, with cluster index as last list list item
-def init_c(data):
+def init_c(data, dim):
     centers = []
     c_index = 0
     for i in np.random.randint(0, len(data), args.k_clusters):
-        centers.append(data[i][:2])
+        centers.append(data[i][:dim])
         centers[c_index].append(c_index)
         c_index += 1
     return centers
 
 
 def plot(c, data, dim):
-    global plot_fn
     col = plt.cm.tab20c(
         np.linspace(0, 1, args.k_clusters)
     )
@@ -199,10 +197,8 @@ def plot(c, data, dim):
                     c=col[i],
                     linewidths=1,
                     edgecolors="000")
-
     plt.savefig(args.export_name+".png")
     plt.show()
-    plot_fn += 1
 
 
 def main():
@@ -210,39 +206,65 @@ def main():
     data = read_tsv()
     orig_data = data  # store off to the side
 
+    if args.transpose:
+        data = np.array(data).T.tolist()
+
     # assign number of dimensions and number of clusters
     dim = len(data[0]) - 1  # -1 as each row comprises of the axes and a final column for the cluster index
-    # k = int(args.k_clusters)
 
+    # # SCORE SCORE SCORE SCORE SCORE SCORE
+    # file = open(args.export_name+".txt", "w")
+    # s = []
+    # for z in range(100):
     # initialize centers at randomized locations
-    centers = init_c(data)
-
+    centers = init_c(data, dim)
     for i in range(len(data)):
         data[i] = assign_c_prob(data[i], dim, centers)
-
     re_c = recenter_prob(data, dim)
     iterations = 1
-
-    while centers != re_c and iterations < threshold:
+    while centers != re_c and iterations < i_threshold:
+        print(iterations)
         iterations += 1
-        # sys.stdout.write("Iteration #" + str(iterations) + "\n")
-
         centers = re_c
-
         for i in range(len(data)):
             data[i] = assign_c_prob(data[i], dim, centers)
-
         re_c = recenter_prob(data, dim)
+
+    #     # SCORE SCORE SCORE SCORE SCORE
+    #     s_z = 0
+    #     for i in range(args.k_clusters):
+    #         for j in data:
+    #             if j[dim][i] == 1:
+    #                 s_z += d_square(centers[i], j, dim)
+    #     s.append(s_z)
+    #     file.write(str(sorted(centers,key=lambda l:l[0]))+"\n")
+    #     print(str(z)+": "+str(s_z))
+    #
+    # file.close()
+    # print("Best score index: " + str(np.where(s == np.amin(s))[0][0]))
+
+
 
     # for c in centers:
     #     print("Cluster #" + str(c[dim]) + ": " + str(c[0:dim]) + "\n")
     # for d in data:
     #     print(str(d) + "\n")
+    i=1
+    # print(data[i][dim])
+    counts = []
+    for i, k in enumerate(centers):
+        counts.append(sum([np.where(b[dim]==np.amax(b[dim]))[0][0]==i for b in data]))
+    plt.hist(counts, bins=30)
+    plt.savefig(args.export_name+".png")
+    plt.show()
 
-    print("Fuzzy: " + str(args.fuzzy) + "\n")
-    print("Iterations: " + str(iterations) + "\n")
+    print(np.array([a[dim] for a in data]).flatten().max())
+    print(np.array([a[dim] for a in data]).flatten().min())
+    print(np.array([a[dim] for a in data]).flatten().sum()/len(data))
+    print("Fuzzy: " + str(args.fuzzy))
+    print("Iterations: " + str(iterations))
 
-    plot(centers, data, dim)
+    # plot(centers, data, dim)
 
 
 if __name__ == "__main__":
