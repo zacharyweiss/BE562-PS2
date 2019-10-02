@@ -1,7 +1,9 @@
 import csv
 import argparse
 import matplotlib.pyplot as plt
+import matplotlib.colors
 import numpy as np
+import hypertools as hyp
 
 parser = argparse.ArgumentParser()
 parser.add_argument('fname', type=str)
@@ -13,7 +15,7 @@ args = parser.parse_args()
 
 # other arguments
 d_threshold = 10**(-100)  # minimum distance to fix overflow and overlapping point issues, acts like a miniature laplace
-i_threshold = 10
+i_threshold = 50
 # max number of iterations before convergence declared
 m = 2  # degree of "fuzziness"; higher -> fuzzier, default of 2
 
@@ -200,6 +202,25 @@ def plot(c, data, dim):
     plt.savefig(args.export_name+".png")
     plt.show()
 
+def plot_big(data, dim):
+    print("bigplot bb")
+    col = plt.cm.tab20c(np.linspace(0, 1, args.k_clusters))
+    hue = [0]*len(data)
+    for i, row in enumerate(data):
+        hue[i] = matplotlib.colors.rgb2hex(col[np.where(row[dim] == np.amax(row[dim]))[0][0]])
+
+    dat = np.array([a[:dim] for a in data])
+    TSNE = hyp.plot(dat, '.', reduce="TruncatedSVD", hue=hue, save_path=args.export_name+".png")  #reduce="TSNE",
+
+
+def plot_bars(centers, data, dim):
+    counts = []
+    for i, k in enumerate(centers):
+        counts.append(sum([np.where(b[dim]==np.amax(b[dim]))[0][0]==i for b in data]))
+    plt.hist(counts, bins=30)
+    plt.savefig(args.export_name+".png")
+    plt.show()
+
 
 def main():
     # read in tsv data
@@ -249,14 +270,10 @@ def main():
     #     print("Cluster #" + str(c[dim]) + ": " + str(c[0:dim]) + "\n")
     # for d in data:
     #     print(str(d) + "\n")
-    i=1
+    #i=1
     # print(data[i][dim])
-    counts = []
-    for i, k in enumerate(centers):
-        counts.append(sum([np.where(b[dim]==np.amax(b[dim]))[0][0]==i for b in data]))
-    plt.hist(counts, bins=30)
-    plt.savefig(args.export_name+".png")
-    plt.show()
+
+    plot_big(data, dim)
 
     print(np.array([a[dim] for a in data]).flatten().max())
     print(np.array([a[dim] for a in data]).flatten().min())

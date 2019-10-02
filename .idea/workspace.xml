@@ -28,7 +28,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/fkmeans.py" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Background" />
+    <property name="settings.editor.selected.configurable" value="vcs.Mercurial" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -77,7 +77,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ps2-kmeans.py" />
-      <option name="PARAMETERS" value="&quot;iron.txt&quot; &quot;150&quot; &quot;null&quot; &quot;-fuzzy&quot;" />
+      <option name="PARAMETERS" value="&quot;iron.txt&quot; &quot;20&quot; &quot;null&quot; &quot;-fuzzy&quot;" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -221,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569890316126</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Iterations">
+      <created>1569891121825</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1569891121825</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -246,7 +253,8 @@
     <MESSAGE value="Argument reworking to allow flags; fuzzy k-means flag switching" />
     <MESSAGE value="Reworked plotting, fuzzy working, non-fuzzy integrated into same functions as fuzzy (in form of a special case of fuzzy)" />
     <MESSAGE value="Removing redundancy" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removing redundancy" />
+    <MESSAGE value="Iterations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Iterations" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -258,8 +266,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ps2-kmeans.py</url>
-          <line>263</line>
+          <line>280</line>
           <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ps2-kmeans.py</url>
+          <line>212</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
